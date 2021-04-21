@@ -41,6 +41,8 @@
 
 <script>
 import Menu from '@/components/Menu.vue';
+ //import { getLogin } from "../service/api.js";
+/* import axios from "axios";  */
     export default {
         name:"login",
         components:{
@@ -51,9 +53,12 @@ import Menu from '@/components/Menu.vue';
                 this.$router.replace({ path: "/rego" });
             },
             login(form){
+                this.username = this.form.username;
+                this.password = this.form.password;
                 this.$refs[form].validate((v)=>{
                     if(v){
                         this.$router.replace({ path: "/home" });
+                        this.$store.dispatch("getLogin")
                     }else{
                         alert("请输入正确的登录信息")
                         return false
@@ -86,7 +91,25 @@ import Menu from '@/components/Menu.vue';
                     ]
                 },
             }
-        }
+        },
+        computed: {
+            username:{
+                get(){
+                    return this.$store.state.form.username;
+                },
+                set(newVal){
+                    this.$store.commit("setUser",newVal);
+                }
+            },
+            password:{
+                get(){
+                    return this.$store.state.form.password;
+                },
+                set(newVal){
+                    this.$store.commit("setPwd",newVal)
+                }
+            }
+        },
     }
 </script>
 

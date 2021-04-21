@@ -17,7 +17,6 @@
                         注册
                     </div>
                 <div class="loginPage">
-                    
                     <el-form :model="ruleform" :rules="rules" ref="ruleform" label-width="60px" >
                     <el-form-item  >
                         <el-input placeholder="请输入账号"></el-input>
@@ -29,7 +28,7 @@
                         <el-input placeholder="请再次输入密码" type="password"></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-button>注册</el-button>
+                        <el-button type="primary">注册</el-button>
                     </el-form-item>
                 </el-form>
                 

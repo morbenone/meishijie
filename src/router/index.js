@@ -8,12 +8,14 @@ const routes = [
   {
     path: '/',
     redirect:'/home',
-    component: () => import('../views/Home.vue')
+    component: () => import('../views/Home.vue'),
+    meta:{needLogin:true}
   },
   {
     path:'/home',
     name:'Home',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue'),
+    meta:{needLogin:true}
   },
   {
     path: '/about',
