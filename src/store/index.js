@@ -31,19 +31,19 @@ const actions={
       console.log(res.data);
       context.commit('setLogin',{result:res.data})
       let length = res.data.length;
-      let userNameArr = [];
-      let passWordArr = [];
-      let ses = window.sessionStorage;
-      for(var i = 0;i++;i<length){
+      var userNameArr = [];
+      var passWordArr = [];
+      var ses = window.sessionStorage;
+      //debugger
+      for(var i = 0;i<length;i++){
         userNameArr.push(res.data[i].username);
         passWordArr.push(res.data[i].password);
       }
-      if(userNameArr.indexOf(state.form.username) !== -1){
-       // console.log(userNameArr);
-        alert("账号不存在");
+      if(userNameArr.indexOf(state.form.username) === -1){
+       alert("账号不存在");
       }else{
         var index = userNameArr.indexOf(state.form.username);
-        debugger
+        
         if(passWordArr[index] === state.form.password){
 
           ses.setItem("data",res.data[index].token);
