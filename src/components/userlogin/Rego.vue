@@ -17,18 +17,18 @@
                         注册
                     </div>
                 <div class="loginPage">
-                    <el-form :model="ruleform" :rules="rules" ref="ruleform" label-width="60px" >
-                    <el-form-item  >
-                        <el-input placeholder="请输入账号"></el-input>
+                <el-form :model="regoForm" :rules="rules" ref="regoForm" label-width="60px" >
+                    <el-form-item  prop="regoName">
+                        <el-input placeholder="请输入账号" v-model="regoForm.regoName"></el-input>
                     </el-form-item>
-                    <el-form-item >
-                        <el-input placeholder="请输入密码" type="password"></el-input>
+                    <el-form-item prop="regoPaw">
+                        <el-input placeholder="请输入密码" type="password" v-model="regoForm.regoPaw"></el-input>
                     </el-form-item>
-                    <el-form-item >
-                        <el-input placeholder="请再次输入密码" type="password"></el-input>
+                    <el-form-item prop="cheakPaw">
+                        <el-input placeholder="请再次输入密码" type="password" v-model="regoForm.cheakPaw"></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary">注册</el-button>
+                        <el-button type="primary" @click="rego('regoForm')">注册</el-button>
                     </el-form-item>
                 </el-form>
                 
@@ -45,13 +45,87 @@
 import Menu from '@/components/Menu.vue';
     export default {
         name:"login",
+        data() {
+            var validateName = (rule,value,callback)=>{
+                if(!value){
+                    return callback(new Error('账号不能为空'))
+                }
+            };
+            var validatePaw = (rule,value,callback) => {
+                if(value === ""){
+                    callback (new Error("密码不能为空"))
+                }else{
+                    if(this.regoForm.regoPaw !== ""){
+                        this.$refs.regoForm.validateField("validateCheakPaw")
+                    }
+                    callback()
+                }
+            };
+            var validateCheakPaw = (rule,value,callback) => {
+                if(value === ""){
+                    callback (new Error("密码不能为空"));
+                }else if(value !== this.regoForm.regoPaw){
+                    callback (new Error("两次密码输入不一致"));
+                }else{
+                    callback();
+                }
+            };
+            return {
+                regoForm:{
+                    regoName:'',
+                    regoPaw:'',
+                    cheakPaw:'',
+                },
+                
+                rules:{
+                    regoName:[
+                        {
+                        validator:validateName,trigger:'blur'
+                        },
+                        {
+                            min:6,max:12,message:"请输入6~12位账号",trigger:'blur'
+                        }
+                    ],
+                    regoPaw:[
+                        {
+                        validator:validatePaw,trigger:'blur'
+                        },
+                        {
+                            min:6,max:12,message:"请输入6~12位密码",trigger:'blur'
+                        }
+                    ],
+                    cheakPaw:[
+                        {
+                        validator:validateCheakPaw,trigger:'blur'
+                        },
+                        {
+                            min:6,max:12,message:"请输入6~12位密码",trigger:'blur'
+                        }
+                    ],
+                }
+            }
+        },
         components:{
             Menu,
         },
         methods: {
             toLogin() {
                 this.$router.replace({ path: "/login" });
-            }
+            },
+            rego(regoForm){
+                this.regoName = this.regoForm.regoName;
+                this.regoPaw = this.regoForm.regoPaw;
+                this.cheakPaw = this.regoForm.cheakPaw;
+                this.$refs[regoForm].validate((v)=>{
+                    if(v){
+                        
+                        this.$store.dispatch("getRego")
+                    }else{
+                        alert("请输入正确的注册信息");
+                        return false
+                    }
+                })
+            },
         },
     }
 </script>

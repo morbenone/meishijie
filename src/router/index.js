@@ -14,7 +14,7 @@ const routes = [
   {
     path:'/home',
     name:'Home',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue'),
+    component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue'),
     meta:{needLogin:true}
   },
   {
@@ -25,12 +25,12 @@ const routes = [
   {
     path:"/login",
     name:"Login",
-    component: () => import(/* webpackChunkName: "about" */ '@/components/userlogin/Login.vue')
+    component: () => import(/* webpackChunkName: "login" */ '@/components/userlogin/Login.vue')
   },
   {
     path:"/rego",
     name:"Rego",
-    component: () => import(/* webpackChunkName: "about" */ '@/components/userlogin/Rego.vue')
+    component: () => import(/* webpackChunkName: "rego" */ '@/components/userlogin/Rego.vue')
   }
 ]
 
