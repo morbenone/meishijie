@@ -55,9 +55,6 @@ export default {
     },
     rego(){
       this.$router.replace({ path: "/rego" });
-    },
-    logout(){
-      this.$store.dispatch('logout');
     }
   },
 }
@@ -140,7 +137,7 @@ export default {
     line-height: 80px;
     cursor: pointer;
   }
-  .login,.logout{
+  .login{
     color: #fff;
     font-size: 16px;
     margin-right: 12px;

@@ -55,9 +55,6 @@ export default {
     },
     rego(){
       this.$router.replace({ path: "/rego" });
-    },
-    logout(){
-      this.$store.dispatch('logout');
     }
   },
 }
@@ -132,15 +129,16 @@ export default {
     transition: all ease 0.1s;
     border: 0px
   }
-  .userLogin,.userLogout{
+  .userLogin{
     display: inline-block;
     text-align: right; 
     font-size: 12px;
     color: #fff;
     line-height: 80px;
     cursor: pointer;
+    
   }
-  .login,.logout{
+  .login{
     color: #fff;
     font-size: 16px;
     margin-right: 12px;

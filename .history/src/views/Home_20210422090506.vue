@@ -55,9 +55,6 @@ export default {
     },
     rego(){
       this.$router.replace({ path: "/rego" });
-    },
-    logout(){
-      this.$store.dispatch('logout');
     }
   },
 }

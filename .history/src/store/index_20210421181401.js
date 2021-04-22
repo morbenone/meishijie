@@ -2,7 +2,9 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { getLogin } from '../service/api.js'
 import router from '../router/index.js'
-
+/* import mutations from './mutations'
+import state from './state'
+import actions from './actions' */
 Vue.use(Vuex)
 const state = {
   form:{
@@ -29,11 +31,10 @@ const actions={
       console.log(res.data);
       context.commit('setLogin',{result:res.data})
       let length = res.data.length;
-      let userNameArr = [];
-      let passWordArr = [];
-      let ses = window.sessionStorage;
-      //debugger
-      for(var i = 0;i<length;i++){
+      var userNameArr = [];
+      var passWordArr = [];
+      var ses = window.sessionStorage;
+      for(var i = 0;i++;i<length){
         userNameArr.push(res.data[i].username);
         passWordArr.push(res.data[i].password);
       }
@@ -43,10 +44,9 @@ const actions={
         var index = userNameArr.indexOf(state.form.username);
         
         if(passWordArr[index] === state.form.password){
-          //console.log(data);
-          ses.setItem("token",res.data[index].token);
-          //console.log(ses,"ses");
-         
+
+          ses.setItem("data",res.data[index].token);
+          console.log(ses,"ses");
           state.title = res.data[index].usertitle;
           router.push("/");
         }else{
@@ -55,8 +55,8 @@ const actions={
       }
     })
   },
-  logout(){
-    window.sessionStorage.removeItem("token");
+  loginOut(){
+    window.sessionStorage.removeItem("data");
     router.push("/login")
   }
 };

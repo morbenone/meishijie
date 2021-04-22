@@ -8,7 +8,7 @@
         </a>
         <div class="search_box">
           <div class="search_box_input">
-            <el-form :inline="true" :model="search_form" ref="search_form">
+            <el-form :inline="true" model="search_form" ref="search_form">
               <el-form-item prop="search_name">
                 <el-input v-model="search_form.search_name" placeholder="菜谱名、食材名"></el-input>
               </el-form-item>
@@ -23,9 +23,6 @@
           <span class="login" @click="login">登录</span>
           <span style="">|</span>
           <span class="rego"  @click="rego">注册</span>
-        </div>
-        <div class="userLogout">
-          <span class="logout" @click="logout">退出登录</span>
         </div>
       </div>
       
@@ -42,8 +39,7 @@ export default {
     return {
       search_form:{
         serach_name:"",
-      },
-      isDisplay:false
+      }
     }
   },
   components: {
@@ -55,9 +51,6 @@ export default {
     },
     rego(){
       this.$router.replace({ path: "/rego" });
-    },
-    logout(){
-      this.$store.dispatch('logout');
     }
   },
 }
@@ -132,15 +125,16 @@ export default {
     transition: all ease 0.1s;
     border: 0px
   }
-  .userLogin,.userLogout{
+  .userLogin{
     display: inline-block;
     text-align: right; 
     font-size: 12px;
     color: #fff;
     line-height: 80px;
     cursor: pointer;
+    
   }
-  .login,.logout{
+  .login{
     color: #fff;
     font-size: 16px;
     margin-right: 12px;

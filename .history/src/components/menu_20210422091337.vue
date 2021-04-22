@@ -2,6 +2,7 @@
   <div class="nav-menu">
     <div class="nav">
       <el-menu
+       
         class="el-menu-demo"
         mode="horizontal"
         @select="listIndex"

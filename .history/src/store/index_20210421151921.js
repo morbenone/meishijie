@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { getLogin } from '../service/api.js'
-import router from '../router/index.js'
+import { getLogin } from '../service/api.js';
+import router from '../router/inedx'
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 const state = {
   form:{
     username:'',
@@ -16,7 +16,7 @@ const mutations = {
   setLogin(state,param){
     state.result = param.result
   },
-  setUser(state,n){
+  serUser(state,n){
     state.form.username = n
   },
   setPwd(state,n){
@@ -32,21 +32,17 @@ const actions={
       let userNameArr = [];
       let passWordArr = [];
       let ses = window.sessionStorage;
-      //debugger
-      for(var i = 0;i<length;i++){
+      for(var i = 0;i++;i<length){
         userNameArr.push(res.data[i].username);
         passWordArr.push(res.data[i].password);
       }
       if(userNameArr.indexOf(state.form.username) === -1){
-       alert("账号不存在");
+        alert("账号不存在");
       }else{
         var index = userNameArr.indexOf(state.form.username);
-        
-        if(passWordArr[index] === state.form.password){
-          //console.log(data);
-          ses.setItem("token",res.data[index].token);
-          //console.log(ses,"ses");
-         
+        if(passWordArr[inedx] === state.form.password){
+          ses.setItem("data",res.data[index].token);
+          console.log(ser,"ses");
           state.title = res.data[index].usertitle;
           router.push("/");
         }else{
@@ -55,16 +51,12 @@ const actions={
       }
     })
   },
-  logout(){
-    window.sessionStorage.removeItem("token");
+  loginOut(){
+    window.sessionStorage.removeItem("data");
     router.push("/login")
   }
-};
-export default new Vuex.Store({
-  state,
-  mutations,
-  actions,
-})
+} 
+
 
 
 

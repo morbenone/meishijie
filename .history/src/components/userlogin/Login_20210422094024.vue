@@ -41,7 +41,7 @@
 
 <script>
 import Menu from '@/components/Menu.vue';
-//import { getLogin } from "../service/api.js";
+ import { getLogin } from "../service/api.js";
 /* import axios from "axios";  */
     export default {
         name:"login",

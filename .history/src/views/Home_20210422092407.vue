@@ -50,12 +50,12 @@ export default {
     Menu
   },
   methods: {
-    login() {
+    /* login() {
       this.$router.replace({ path: "/login" });
     },
     rego(){
       this.$router.replace({ path: "/rego" });
-    },
+    }, */
     logout(){
       this.$store.dispatch('logout');
     }

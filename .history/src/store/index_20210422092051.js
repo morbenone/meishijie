@@ -29,9 +29,9 @@ const actions={
       console.log(res.data);
       context.commit('setLogin',{result:res.data})
       let length = res.data.length;
-      let userNameArr = [];
-      let passWordArr = [];
-      let ses = window.sessionStorage;
+      var userNameArr = [];
+      var passWordArr = [];
+      var ses = window.sessionStorage;
       //debugger
       for(var i = 0;i<length;i++){
         userNameArr.push(res.data[i].username);
@@ -46,7 +46,7 @@ const actions={
           //console.log(data);
           ses.setItem("token",res.data[index].token);
           //console.log(ses,"ses");
-         
+          debugger
           state.title = res.data[index].usertitle;
           router.push("/");
         }else{

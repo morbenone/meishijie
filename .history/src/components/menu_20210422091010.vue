@@ -1,7 +1,8 @@
 <template>
-  <div class="nav-menu">
+  <div id="menu">
     <div class="nav">
       <el-menu
+        :default-active="activeIndex"
         class="el-menu-demo"
         mode="horizontal"
         @select="listIndex"
@@ -23,7 +24,7 @@
 
 <script>
 export default {
-  name: "nav-menu",
+  name: "menu",
   methods: {
     listIndex(key, keyPath) {
       console.log(key, keyPath);
@@ -35,7 +36,7 @@ export default {
 };
 </script>
 <style  scoped lang="scss">
-.nav-menu {
+.menu {
   display: inline-block;
   width: 670px;
   height: 80px;

@@ -14,7 +14,7 @@ Vue.config.productionTip = false;
 if(process.env.NODE_ENV !== "production") require('./mock/mock.js');
 router.beforeEach((to,from,next)=>{
   if(to.meta.needLogin){
-    if(window.sessionStorage.token){
+    if(window.sessionStorage.data){
       next()
     }else{
       next("/login");

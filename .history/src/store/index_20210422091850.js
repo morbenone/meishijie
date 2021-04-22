@@ -29,9 +29,9 @@ const actions={
       console.log(res.data);
       context.commit('setLogin',{result:res.data})
       let length = res.data.length;
-      let userNameArr = [];
-      let passWordArr = [];
-      let ses = window.sessionStorage;
+      var userNameArr = [];
+      var passWordArr = [];
+      var ses = window.sessionStorage;
       //debugger
       for(var i = 0;i<length;i++){
         userNameArr.push(res.data[i].username);
@@ -45,8 +45,7 @@ const actions={
         if(passWordArr[index] === state.form.password){
           //console.log(data);
           ses.setItem("token",res.data[index].token);
-          //console.log(ses,"ses");
-         
+          console.log(ses,"ses");
           state.title = res.data[index].usertitle;
           router.push("/");
         }else{
@@ -56,7 +55,7 @@ const actions={
     })
   },
   logout(){
-    window.sessionStorage.removeItem("token");
+    window.sessionStorage.removeItem("data");
     router.push("/login")
   }
 };

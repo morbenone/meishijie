@@ -41,7 +41,7 @@
 
 <script>
 import Menu from '@/components/Menu.vue';
-//import { getLogin } from "../service/api.js";
+ //import { getLogin } from "../service/api.js";
 /* import axios from "axios";  */
     export default {
         name:"login",
@@ -58,7 +58,7 @@ import Menu from '@/components/Menu.vue';
                 this.$refs[form].validate((v)=>{
                     if(v){
                         //this.$router.replace({ path: "/home" });
-                        this.$store.dispatch('getLogin')
+                        this.$store.dispatch("getLogin")
                     }else{
                         alert("请输入正确的登录信息")
                         return false
