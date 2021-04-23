@@ -16,6 +16,17 @@ Mock.mock('/getLogin',{
         "username":'luxiaobo',
         "password":"123456789",
         "token":'648587841957819193',
+        "regoName":'',
+        "regoPaw":"",
+        }]
+    }
+)
+Mock.mock('/getRego',{
+    "error_code":0,
+    "data":[{
+        "id":"",
+        "regoName":'luxiaobo',
+        "regoPaw":"123456789",
         }]
     }
 )

@@ -56,8 +56,10 @@ import Menu from '@/components/Menu.vue';
                 this.username = this.form.username;
                 this.password = this.form.password;
                 this.$refs[form].validate((v)=>{
+                    
                     if(v){
-                        //this.$router.replace({ path: "/home" });
+                        
+                        //this.$router.replace({ path: "/login" });
                         this.$store.dispatch('getLogin')
                     }else{
                         alert("请输入正确的登录信息")

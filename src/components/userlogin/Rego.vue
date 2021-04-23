@@ -24,9 +24,9 @@
                     <el-form-item prop="regoPaw">
                         <el-input placeholder="请输入密码" type="password" v-model="regoForm.regoPaw"></el-input>
                     </el-form-item>
-                    <el-form-item prop="cheakPaw">
+                    <!-- <el-form-item prop="cheakPaw">
                         <el-input placeholder="请再次输入密码" type="password" v-model="regoForm.cheakPaw"></el-input>
-                    </el-form-item>
+                    </el-form-item> -->
                     <el-form-item>
                         <el-button type="primary" @click="rego('regoForm')">注册</el-button>
                     </el-form-item>
@@ -50,18 +50,19 @@ import Menu from '@/components/Menu.vue';
                 if(!value){
                     return callback(new Error('账号不能为空'))
                 }
+                callback();
             };
             var validatePaw = (rule,value,callback) => {
                 if(value === ""){
                     callback (new Error("密码不能为空"))
                 }else{
-                    if(this.regoForm.regoPaw !== ""){
-                        this.$refs.regoForm.validateField("validateCheakPaw")
-                    }
+                    /* if(this.regoForm.regoPaw !== ""){
+                        this.$refs.regoForm.validateField("cheakPaw")
+                    } */
                     callback()
                 }
             };
-            var validateCheakPaw = (rule,value,callback) => {
+            /* var validateCheakPaw = (rule,value,callback) => {
                 if(value === ""){
                     callback (new Error("密码不能为空"));
                 }else if(value !== this.regoForm.regoPaw){
@@ -69,12 +70,12 @@ import Menu from '@/components/Menu.vue';
                 }else{
                     callback();
                 }
-            };
+            }; */
             return {
                 regoForm:{
                     regoName:'',
                     regoPaw:'',
-                    cheakPaw:'',
+                    
                 },
                 
                 rules:{
@@ -94,14 +95,14 @@ import Menu from '@/components/Menu.vue';
                             min:6,max:12,message:"请输入6~12位密码",trigger:'blur'
                         }
                     ],
-                    cheakPaw:[
+                    /* cheakPaw:[
                         {
                         validator:validateCheakPaw,trigger:'blur'
                         },
                         {
                             min:6,max:12,message:"请输入6~12位密码",trigger:'blur'
                         }
-                    ],
+                    ], */
                 }
             }
         },
@@ -114,18 +115,37 @@ import Menu from '@/components/Menu.vue';
             },
             rego(regoForm){
                 this.regoName = this.regoForm.regoName;
-                this.regoPaw = this.regoForm.regoPaw;
-                this.cheakPaw = this.regoForm.cheakPaw;
-                this.$refs[regoForm].validate((v)=>{
-                    if(v){
+                this.regoPaw = this.regoForm.regoPaw; 
+                /* this.cheakPaw = this.regoForm.cheakPaw; */
+                this.$refs[regoForm].validate((valid)=>{
+                    if(valid){
                         
                         this.$store.dispatch("getRego")
                     }else{
+                        
                         alert("请输入正确的注册信息");
                         return false
                     }
                 })
             },
+        },
+        computed: {
+            regoName:{
+                get(){
+                    return this.$store.state.regoForm.regoName;
+                },
+                set(newVal){
+                    this.$store.commit("setRegoUser",newVal);
+                }
+            },
+            regoPaw:{
+                get(){
+                    return this.$store.state.regoForm.regoPaw;
+                },
+                set(newVal){
+                    this.$store.commit("setRegoPwd",newVal)
+                }
+            }
         },
     }
 </script>
