@@ -24,9 +24,9 @@
                     <el-form-item prop="regoPaw">
                         <el-input placeholder="请输入密码" type="password" v-model="regoForm.regoPaw"></el-input>
                     </el-form-item>
-                    <el-form-item prop="cheakPaw">
+                    <!-- <el-form-item prop="cheakPaw">
                         <el-input placeholder="请再次输入密码" type="password" v-model="regoForm.cheakPaw"></el-input>
-                    </el-form-item>
+                    </el-form-item> -->
                     <el-form-item>
                         <el-button type="primary" @click="rego('regoForm')">注册</el-button>
                     </el-form-item>
@@ -50,20 +50,19 @@ import Menu from '@/components/Menu.vue';
                 if(!value){
                     return callback(new Error('账号不能为空'))
                 }
+                callback();
             };
             var validatePaw = (rule,value,callback) => {
                 if(value === ""){
                     callback (new Error("密码不能为空"))
                 }else{
-                    if(this.regoForm.regoPaw !== ""){
                         this.$refs.regoForm.validateField("cheakPaw")
-                    }
-                    callback()
+                    }callback()
                     
                     
                 }
-            };
-            var validateCheakPaw = (rule,value,callback) => {
+            
+            /* var validateCheakPaw = (rule,value,callback) => {
                 if(value === ""){
                     callback (new Error("密码不能为空"));
                 }else if(value !== this.regoForm.regoPaw){
@@ -71,12 +70,12 @@ import Menu from '@/components/Menu.vue';
                 }else{
                     callback();
                 }
-            };
+            }; */
             return {
                 regoForm:{
                     regoName:'',
                     regoPaw:'',
-                    cheakPaw:'',
+                    
                 },
                 
                 rules:{
@@ -96,34 +95,36 @@ import Menu from '@/components/Menu.vue';
                             min:6,max:12,message:"请输入6~12位密码",trigger:'blur'
                         }
                     ],
-                    cheakPaw:[
+                    /* cheakPaw:[
                         {
                         validator:validateCheakPaw,trigger:'blur'
                         },
                         {
                             min:6,max:12,message:"请输入6~12位密码",trigger:'blur'
                         }
-                    ],
-                }
+                    ], */
+                },
             }
         },
         components:{
             Menu,
         },
+        
         methods: {
             toLogin() {
                 this.$router.replace({ path: "/login" });
             },
             rego(regoForm){
+               
+                this.$store.state.regoForm = Object.assign({},this.regoForm)
                 this.regoName = this.regoForm.regoName;
                 this.regoPaw = this.regoForm.regoPaw;
-                this.cheakPaw = this.regoForm.cheakPaw;
                 this.$refs[regoForm].validate((v)=>{
-                    
                     if(v){
+                       
+						this.$store.dispatch('getRego')
+						}else{
                         
-                        this.$store.dispatch('getRego')
-                    }else{
                         alert("请输入正确的注册信息");
                         return false
                     }
@@ -144,7 +145,7 @@ import Menu from '@/components/Menu.vue';
                     return this.$store.state.regoForm.regoPaw;
                 },
                 set(newVal){
-                    this.$store.commit("setRegoPwd",newVal)
+                    this.$store.commit("setRegoPaw",newVal)
                 }
             }
         },

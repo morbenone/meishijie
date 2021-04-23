@@ -53,13 +53,14 @@ import Menu from '@/components/Menu.vue';
                 this.$router.replace({ path: "/rego" });
             },
             login(form){
+                this.$store.state.form = Object.assign({},this.form)
                 this.username = this.form.username;
                 this.password = this.form.password;
                 this.$refs[form].validate((v)=>{
+                    
                     if(v){
-                        
                         //this.$router.replace({ path: "/home" });
-                        this.$store.dispatch('getLogin')
+						this.$store.dispatch('getLogin')
                     }else{
                         alert("请输入正确的登录信息")
                         return false
@@ -107,7 +108,7 @@ import Menu from '@/components/Menu.vue';
                     return this.$store.state.form.password;
                 },
                 set(newVal){
-                    this.$store.commit("setPwd",newVal)
+                    this.$store.commit("setPaw",newVal)
                 }
             }
         },
