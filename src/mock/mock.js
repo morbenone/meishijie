@@ -19,3 +19,12 @@ Mock.mock('/getLogin',{
         }]
     }
 )
+Mock.mock('/getRego',{
+    "error_code":0,
+    "data":[{
+        "id":'1',
+        "regoName":'',
+        "regoPaw":"",
+    }]
+    }
+)

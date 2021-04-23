@@ -56,9 +56,11 @@ import Menu from '@/components/Menu.vue';
                     callback (new Error("密码不能为空"))
                 }else{
                     if(this.regoForm.regoPaw !== ""){
-                        this.$refs.regoForm.validateField("validateCheakPaw")
+                        this.$refs.regoForm.validateField("cheakPaw")
                     }
                     callback()
+                    
+                    
                 }
             };
             var validateCheakPaw = (rule,value,callback) => {
@@ -117,15 +119,34 @@ import Menu from '@/components/Menu.vue';
                 this.regoPaw = this.regoForm.regoPaw;
                 this.cheakPaw = this.regoForm.cheakPaw;
                 this.$refs[regoForm].validate((v)=>{
+                    
                     if(v){
                         
-                        this.$store.dispatch("getRego")
+                        this.$store.dispatch('getRego')
                     }else{
                         alert("请输入正确的注册信息");
                         return false
                     }
                 })
             },
+        },
+        computed: {
+            regoName:{
+                get(){
+                    return this.$store.state.regoForm.regoName;
+                },
+                set(newVal){
+                    this.$store.commit("setRegoUser",newVal);
+                }
+            },
+            regoPaw:{
+                get(){
+                    return this.$store.state.regoForm.regoPaw;
+                },
+                set(newVal){
+                    this.$store.commit("setRegoPwd",newVal)
+                }
+            }
         },
     }
 </script>

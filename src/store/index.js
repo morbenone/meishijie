@@ -29,6 +29,12 @@ const mutations = {
   setRego(state,param){
     state.result = param.result
   },
+  setRegoUser(state,n){
+    state.regoForm.regoName = n
+  },
+  setRegoPwd(state,n){
+    state.regoForm.regoPaw = n
+  },
 };
 const actions={
   getLogin(context){
@@ -58,7 +64,9 @@ const actions={
       })
     },
     getRego(con){
+      
       getRego().then(res=>{
+        console.log(1111);
         console.log(res.data);
         con.commit('setRego',{result:res.data})
         let len = res.data.length;

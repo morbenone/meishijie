@@ -57,6 +57,7 @@ import Menu from '@/components/Menu.vue';
                 this.password = this.form.password;
                 this.$refs[form].validate((v)=>{
                     if(v){
+                        
                         //this.$router.replace({ path: "/home" });
                         this.$store.dispatch('getLogin')
                     }else{
